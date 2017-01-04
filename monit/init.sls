@@ -36,7 +36,7 @@ confd_README:
       ### Be aware that any change to files in this directory may be overwritten
       ### 
       
-{% if grains['os'] == 'Debian' %}
+{% if grains['os'] == 'Ubuntu' %}
 upstart:
   file.managed:
     - name: /etc/init/monit.conf
