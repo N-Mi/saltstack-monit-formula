@@ -1,9 +1,17 @@
+{% from "monit/map.jinja" import monit with context %}
 set daemon {{ salt['pillar.get']('monit:daemon_interval') }}
 {%- if salt['pillar.get']('monit:start_delay') %}
 with start delay {{ salt['pillar.get']('monit:start_delay') }}
 {%- endif %}
 
 set logfile {{ salt['pillar.get']('monit:logfile') }}
+
+set idfile {{ monit.idfile }}
+set statefile {{ monit.statefile }}
+set eventqueue
+    basedir {{ monit.eventsdir }} # set the base directory where events will be stored
+    slots 100                     # optionally limit the queue size
+
 {% if salt['pillar.get']('monit:mail') %}
 set mailserver {{ salt['pillar.get']('monit:mail:server') }} port {{ salt['pillar.get']('monit:mail:port') }}
   username "{{ salt['pillar.get']('monit:mail:username') }}" password "{{ salt['pillar.get']('monit:mail:password') }}"
