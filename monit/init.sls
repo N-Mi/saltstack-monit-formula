@@ -23,6 +23,19 @@ confd_dir:
     - group: root
     - mode: 0755
 
+confd_README:
+  file.managed:
+    - name: {{ monit.confd_dir }}/README
+    - user: root
+    - group: root
+    - mode: 444
+    - contents: |
+      ###
+      ### This directory is handled by Salstack !!!
+      ###
+      ### Be aware that any change to files in this directory may be overwritten
+      ### 
+      
 {% if grains['os'] == 'Debian' %}
 upstart:
   file.managed:

@@ -22,4 +22,4 @@ set httpd port {{ salt['pillar.get']('monit:httpd:port') }} and
   allow {{ statement }}
   {% endfor -%}
 {% endif %}
-include {{ confd_dir }}/*
+include {{ confd_dir }}/*.cfg
