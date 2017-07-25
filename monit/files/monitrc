@@ -14,8 +14,12 @@ set eventqueue
 
 {% if salt['pillar.get']('monit:mail') %}
 set mailserver {{ salt['pillar.get']('monit:mail:server') }} port {{ salt['pillar.get']('monit:mail:port') }}
+{%- if salt['pillar.get']('monit:mail:username') %}
   username "{{ salt['pillar.get']('monit:mail:username') }}" password "{{ salt['pillar.get']('monit:mail:password') }}"
-  using tlsv1
+{%- endif %}
+{%- if salt['pillar.get']('monit:mail:ssl') %}
+  using SSLAUTO
+{%- endif %}
   with timeout 30 seconds
 {% endif -%}
 {% if salt['pillar.get']('monit:alert') %}

@@ -5,6 +5,7 @@ monit:
   mail: # Optional section
     server: 'smtp.example.com'
     port: 587
+    ssl: True
     username: 'sender@example.com'
     password: 'mySecretPassword'
   alert: # Optional section
